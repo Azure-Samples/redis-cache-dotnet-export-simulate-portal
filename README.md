@@ -35,7 +35,7 @@ The tutorial is written for Visual Studio 2015 with the [Azure SDK for .NET 2.9]
 ## Detailed Steps
 
 1.	Open developer console on your browser (F12)
-2.	open browser to Azure Portal and run a redis export operation as below.
+2.	Open browser to Azure Portal and run a redis export operation as below.
 To export the current contents of the cache to storage, browse to your cache in the Azure portal and click Export data from the Settings blade of your cache instance.
 <img src="https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/cache-export-data-choose-storage-container.png">
 3. As you can see, the parameters from json file of request playload are the same as Azure CLI and RESR API methods.
@@ -48,7 +48,7 @@ To export the current contents of the cache to storage, browse to your cache in 
  	* subscriptionId
  	* resourceGroup
  	* cacheName
-6. collect related information from Stroage blade.
+6. Collect related information from Stroage blade.
     * storageAccountConnectionString = Settings -> Access keys -> Connection strings
  <img src="https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/connectstring.jpg">
  
