@@ -4,14 +4,14 @@ platforms: .Net
 author: msonecode
 ---
 
-# Export Premium Redis Cache by Simulating as Azure Portal
+# How to export premium Redis cache by simulating as Azure portal #
 
 
 ## Introduction
 
-Export allows you to export the data stored in Azure Redis Cache to Redis compatible RDB file(s). You can use this feature to move data from one Azure Redis Cache instance to another or to another Redis server. During the export process, a temporary file is created on the VM that hosts the Azure Redis Cache server instance, and the file is uploaded to the designated storage account. When the export operation completes with either a status of success or failure, the temporary file is deleted. Import/Export enables you to migrate between different Azure Redis Cache instances or populate the cache with data before use.
+Export allows you to export the data stored in Azure Redis Cache to Redis compatible RDB file(s). You can use this feature to move data from one Azure Redis Cache instance to another or to another Redis server. During the exporting process, a temporary file is created on the VM that hosts the Azure Redis Cache server instance, and the file is uploaded to the designated storage account. When the exporting operation ends in either a status of success or failure, the temporary file is deleted. Import/Export enables you to migrate between different Azure Redis Cache instances or to populate the cache with data before being used.
 
-There are [multiple methods to export redis cache](https://github.com/zhangdingsong/ExportRedisViaAzureCLI) (my previous post talking about this topic), including [Azure Portal](https://docs.microsoft.com/en-us/azure/redis-cache/cache-how-to-import-export-data#export), [Azure PowerShell](https://docs.microsoft.com/en-us/azure/redis-cache/cache-howto-manage-redis-cache-powershell#to-export-a-redis-cache ), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/redis#export) and [REST API](https://docs.microsoft.com/en-us/rest/api/redis/redis#Redis_ExportData) methods. Since the Azure Portal approach is the most simple ope, this post I will introduce a programming method to export Redis Cache by stimulating Azure Portal approach.
+There are [multiple methods to export redis cache](https://github.com/zhangdingsong/ExportRedisViaAzureCLI) (my previous post about this topic), including [Azure Portal](https://docs.microsoft.com/en-us/azure/redis-cache/cache-how-to-import-export-data#export), [Azure PowerShell](https://docs.microsoft.com/en-us/azure/redis-cache/cache-howto-manage-redis-cache-powershell#to-export-a-redis-cache ), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/redis#export) and [REST API](https://docs.microsoft.com/en-us/rest/api/redis/redis#Redis_ExportData) methods. Since the Azure Portal approach is the simplest one, this post I will introduce a programming method to export Redis Cache by stimulating Azure Portal approach.
 
 ## Prerequisites
 
@@ -35,24 +35,24 @@ The tutorial is written for Visual Studio 2015 with the [Azure SDK for .NET 2.9]
 ## Detailed Steps
 
 1.	Open developer console on your browser (F12)
-2.	Open browser to Azure Portal and run a redis export operation as below.
+2.	Open the browser to Azure Portal and run the Redis exporting operation as below.
 To export the current contents of the cache to storage, browse to your cache in the Azure portal and click Export data from the Settings blade of your cache instance.
 <img src="https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/cache-export-data-choose-storage-container.png">
 3. As you can see, the parameters from json file of request playload are the same as Azure CLI and RESR API methods.
 <img src="https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/requestplayload.jpg">   
 
-4. Select one of the invoke calls and view headers, copy the text after "Bearer"
+4. Select one of the invoke calls and view the headers, copy the text after "Bearer"
 <img src="https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/bearer.jpg">
 
-5. Collect related information from Redis Cache overview blade.
+5. Collect the related information from Redis Cache overview blade.
  	* subscriptionId
  	* resourceGroup
  	* cacheName
-6. Collect related information from Stroage blade.
+6. Collect related information from Storage blade.
     * storageAccountConnectionString = Settings -> Access keys -> Connection strings
  <img src="https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/connectstring.jpg">
  
-7. Fill all collected infos into source code you [downloaded](https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/csharp/RedisExportByStimulateAzurePortal.zip) from this page.
+7. Fill in all the collected infos with source code you [downloaded](https://github.com/zhangdingsong/ExportRedisBySimulateAzurePortal/raw/master/csharp/RedisExportByStimulateAzurePortal.zip) from this page.
 
     ```c#
     const string exportString = "https://management.azure.com/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Cache/Redis/{2}/export?api-version=2015-08-01";
